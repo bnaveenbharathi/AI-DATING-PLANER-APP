@@ -1,11 +1,22 @@
 import json
-from fastapi import FastAPI
+from fastapi import FastAPI 
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from google import genai
 from google.genai import types
 import uvicorn
 
-app = FastAPI()
+app = FastAPI() 
+
+app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,  
+        allow_credentials=True, 
+        allow_methods=["*"],  
+        allow_headers=["*"], 
+        )
+   
+   
 class UserInput(BaseModel):
     mood: str 
     activities: list[str]           
@@ -23,9 +34,7 @@ def index():
 
 
 @app.post("/generate-plan")
-async def generate_plan(data: UserInput):
-    
-    
+async def generate_plan(data: UserInput): 
     activities_str = ", ".join(data.activities)
     meals_str = ", ".join(data.meals)
     meal_times = data.meal_times or {}
