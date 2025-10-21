@@ -46,7 +46,7 @@ async def generate_plan(data: UserInput):
         room_str = f"Include a {room_type} room for the night."
 
     client = genai.Client(
-        api_key="AIzaSyCLySTr5rIBoz7Kk8PwrEsSYjV2e56aZBc",
+        api_key="Enter Your API KEY",
     )
 
     model = "gemini-2.5-flash"
